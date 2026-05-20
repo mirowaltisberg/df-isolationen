@@ -1,0 +1,248 @@
+---
+import { site } from '../data/site';
+const phones = site.contact.phones;
+const wa = site.contact_section.whatsappMessage;
+---
+<section id="kontakt" class="contact" aria-labelledby="contact-h">
+  <div class="container">
+    <header class="contact__header">
+      <span class="section-num" aria-hidden="true">05</span>
+      <div class="contact__intro">
+        <p class="eyebrow">{site.contact_section.eyebrow}</p>
+        <h2 id="contact-h">{site.contact_section.headline}</h2>
+        <p class="contact__lead">{site.contact_section.sub}</p>
+      </div>
+    </header>
+
+    <div class="contact__grid">
+      <div class="contact__primary">
+        <span class="contact__label">Direkt erreichbar</span>
+        <a class="contact__phone tnum" href={`tel:${phones[0].tel}`}>
+          {phones[0].display}
+        </a>
+
+        <div class="contact__quick">
+          <a class="quick" href={`tel:${phones[0].tel}`}>
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
+            Anrufen
+          </a>
+          <a class="quick quick--wa" href={`https://wa.me/${phones[0].whatsapp}?text=${encodeURIComponent(wa)}`} rel="noopener" target="_blank">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+              <path d="M17.6 6.32A8 8 0 0 0 4 12.05a7.97 7.97 0 0 0 1.06 4l-1.13 4.13 4.23-1.11a8 8 0 0 0 3.84.98h0a8 8 0 0 0 8-7.97 7.96 7.96 0 0 0-2.4-5.76zm-5.6 12.27h0a6.65 6.65 0 0 1-3.39-.92l-.24-.14-2.51.65.67-2.45-.16-.25a6.61 6.61 0 0 1-1.01-3.5A6.65 6.65 0 0 1 12 5.34a6.6 6.6 0 0 1 4.7 1.93 6.6 6.6 0 0 1 1.94 4.7 6.66 6.66 0 0 1-6.65 6.61zm3.65-4.95c-.2-.1-1.18-.58-1.36-.65-.18-.07-.32-.1-.45.1-.13.2-.51.65-.63.78-.12.13-.23.15-.43.05a5.42 5.42 0 0 1-1.6-.99 6.04 6.04 0 0 1-1.11-1.38c-.12-.2-.01-.31.09-.41.09-.09.2-.23.3-.35.1-.12.13-.2.2-.33.06-.13.03-.25-.02-.35-.05-.1-.45-1.08-.62-1.48-.16-.39-.33-.34-.45-.34l-.38-.01a.74.74 0 0 0-.54.25 2.27 2.27 0 0 0-.7 1.68c0 .99.72 1.94.82 2.07.1.13 1.4 2.16 3.4 3.04.48.2.85.33 1.13.42.48.15.91.13 1.25.08.38-.06 1.18-.48 1.34-.95.17-.46.17-.86.12-.95-.05-.09-.18-.14-.38-.24z"/>
+            </svg>
+            WhatsApp
+          </a>
+        </div>
+
+        <div class="contact__second">
+          <span class="contact__label">Zweitnummer · WhatsApp</span>
+          <a class="tnum" href={`https://wa.me/${phones[1].whatsapp}?text=${encodeURIComponent(wa)}`} rel="noopener" target="_blank">
+            {phones[1].display}
+          </a>
+        </div>
+      </div>
+
+      <div class="contact__secondary">
+        <div class="contact__block">
+          <span class="contact__label">E-Mail</span>
+          <a class="quick contact__mail-btn" href={`mailto:${site.contact.email}`}>
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="2" y="4" width="20" height="16" rx="2" />
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+            </svg>
+            E-Mail schreiben
+          </a>
+        </div>
+
+        <div class="contact__block">
+          <span class="contact__label">Adresse</span>
+          <address>
+            <strong>{site.legalName}</strong><br />
+            {site.contact.address.street}<br />
+            {site.contact.address.postal} {site.contact.address.city}
+          </address>
+        </div>
+
+        <div class="contact__block">
+          <span class="contact__label">Öffnungszeiten</span>
+          <ul class="contact__hours">
+            {site.contact.hours.map((h) => (
+              <li>
+                <span>{h.days}</span>
+                <span aria-hidden="true" class="contact__hours-line"></span>
+                <span>{h.time}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact {
+    padding: clamp(64px, 12vw, 144px) 0;
+    background: var(--c-cream-warm);
+  }
+
+  .contact__header {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-3);
+    margin-bottom: var(--s-7);
+  }
+  @media (min-width: 720px) {
+    .contact__header {
+      grid-template-columns: auto 1fr;
+      gap: clamp(20px, 4vw, 56px);
+      align-items: end;
+    }
+  }
+
+  .contact__intro h2 {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4.5vw, 3.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+    margin-top: var(--s-3);
+    margin-bottom: var(--s-3);
+    max-width: 18ch;
+  }
+
+  .contact__lead {
+    font-family: var(--font-body);
+    font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+    line-height: 1.55;
+    color: var(--c-anthracite-soft);
+    max-width: 50ch;
+    font-variation-settings: "opsz" 16;
+  }
+
+  .contact__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-7);
+    border-top: 1px solid var(--c-line);
+    padding-top: var(--s-6);
+  }
+  @media (min-width: 880px) {
+    .contact__grid {
+      grid-template-columns: 1.4fr 1fr;
+      gap: clamp(48px, 6vw, 96px);
+    }
+  }
+
+  .contact__label {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--c-terracotta);
+    margin-bottom: var(--s-2);
+  }
+
+  .contact__phone {
+    display: block;
+    font-family: var(--font-display);
+    font-feature-settings: 'tnum' 1, 'lnum' 1;
+    font-weight: 800;
+    font-size: clamp(2.25rem, 6.5vw, 4.75rem);
+    line-height: 1;
+    letter-spacing: -0.045em;
+    color: var(--c-anthracite);
+    margin: var(--s-1) 0 var(--s-5);
+    transition: color var(--t-fast) var(--ease-out);
+    text-decoration: none;
+  }
+  .contact__phone:hover { color: var(--c-terracotta); }
+
+  .contact__quick {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-3);
+  }
+  .quick {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 22px;
+    background: var(--c-anthracite);
+    color: var(--c-cream);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.01em;
+    text-decoration: none;
+    transition: background var(--t-fast) var(--ease-out), transform var(--t-fast) var(--ease-out);
+    line-height: 1;
+    min-height: 48px;
+  }
+  .quick:hover { background: var(--c-terracotta); transform: translateY(-1px); }
+  .quick--wa { background: var(--c-terracotta); }
+  .quick--wa:hover { background: var(--c-terracotta-deep); }
+
+  .contact__second {
+    margin-top: var(--s-6);
+    padding-top: var(--s-4);
+    border-top: 1px solid var(--c-line);
+  }
+  .contact__second a {
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--c-anthracite);
+    font-size: 1.4rem;
+    text-decoration: underline;
+    text-decoration-color: var(--c-terracotta);
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 5px;
+    margin-top: var(--s-1);
+    display: inline-block;
+  }
+
+  /* Secondary column */
+  .contact__secondary {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-5);
+  }
+  .contact__block strong {
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--c-anthracite);
+  }
+  .contact__block address {
+    font-family: var(--font-body);
+    font-size: 1.0625rem;
+    line-height: 1.55;
+    font-style: normal;
+    color: var(--c-anthracite-soft);
+  }
+  .contact__mail-btn {
+    margin-top: var(--s-1);
+  }
+
+  .contact__hours {
+    margin: 0;
+    padding: 0;
+  }
+  .contact__hours li {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 14px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--c-line);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    color: var(--c-anthracite-soft);
+  }
+  .contact__hours-line {
+    height: 1px;
+    background: var(--c-line);
+  }
+</style>

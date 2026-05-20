@@ -1,0 +1,22 @@
+{
+  "name": "df-isolationen",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Website für DF Isolationen — Generalunternehmung in Zürich",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview --host",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^5.1.1",
+    "@astrojs/sitemap": "^3.2.1",
+    "@fontsource-variable/schibsted-grotesk": "^5.1.0",
+    "@fontsource-variable/newsreader": "^5.1.0",
+    "sharp": "^0.34.0",
+    "typescript": "^5.7.0"
+  }
+}

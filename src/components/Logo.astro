@@ -1,0 +1,88 @@
+---
+interface Props {
+  variant?: 'default' | 'light';
+  href?: string | null;
+  size?: 'sm' | 'md' | 'lg';
+}
+const { variant = 'default', href = '/', size = 'md' } = Astro.props;
+const Tag = href ? 'a' : 'span';
+---
+<Tag
+  {...(href ? { href } : {})}
+  class:list={['logo', `logo--${variant}`, `logo--${size}`]}
+  aria-label="DF Isolationen — zur Startseite"
+>
+  <span class="logo__brand">
+    <span class="logo__mark">DF</span>
+    <span class="logo__dot" aria-hidden="true"></span>
+  </span>
+  <span class="logo__divider" aria-hidden="true"></span>
+  <span class="logo__name">Isolationen</span>
+</Tag>
+
+<style>
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    font-family: var(--font-display);
+    color: var(--c-anthracite);
+    text-decoration: none;
+    line-height: 1;
+    user-select: none;
+  }
+
+  .logo__brand {
+    display: inline-flex;
+    align-items: baseline;
+    position: relative;
+  }
+
+  .logo__mark {
+    font-weight: 800;
+    font-size: 1.5em;
+    letter-spacing: -0.05em;
+  }
+
+  .logo__dot {
+    display: inline-block;
+    width: 0.32em;
+    height: 0.32em;
+    background: var(--c-terracotta);
+    margin-left: 0.16em;
+    transform: translateY(-0.05em);
+    transition: transform var(--t-med) var(--ease-out);
+  }
+
+  .logo:hover .logo__dot {
+    transform: translateY(-0.18em);
+  }
+
+  .logo__divider {
+    display: inline-block;
+    width: 1px;
+    height: 1.2em;
+    background: currentColor;
+    opacity: 0.25;
+  }
+
+  .logo__name {
+    font-weight: 600;
+    font-size: 0.78em;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .logo--sm { font-size: 0.95rem; }
+  .logo--md { font-size: 1.05rem; }
+  .logo--lg { font-size: 1.5rem; }
+
+  .logo--light { color: var(--c-cream); }
+
+  @media (max-width: 480px) {
+    .logo__divider,
+    .logo__name {
+      display: none;
+    }
+  }
+</style>

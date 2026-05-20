@@ -1,0 +1,102 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { site } from '../data/site';
+const phone = site.contact.phones[0];
+---
+<BaseLayout
+  pathname="/datenschutz"
+  title={`Datenschutz — ${site.name}`}
+  description={`Datenschutzerklärung von ${site.legalName}.`}
+>
+  <Header />
+  <main id="main" class="legal">
+    <article class="container container--narrow">
+      <header class="legal__header">
+        <p class="eyebrow">Rechtliches</p>
+        <h1>Datenschutz</h1>
+      </header>
+
+      <section>
+        <h2>Grundsätzliches</h2>
+        <p>
+          Der Schutz Ihrer Daten ist uns wichtig. Diese Webseite verarbeitet so
+          wenig personenbezogene Daten wie möglich. Es kommen keine Cookies,
+          kein Tracking und keine Analyse-Tools von Drittanbietern zum Einsatz.
+          Massgebend ist das schweizerische Datenschutzrecht (revDSG) sowie,
+          soweit anwendbar, die DSGVO der Europäischen Union.
+        </p>
+      </section>
+
+      <section>
+        <h2>Verantwortliche Stelle</h2>
+        <address>
+          {site.legalName}<br />
+          {site.contact.address.street}<br />
+          {site.contact.address.postal} {site.contact.address.city}<br />
+          {site.contact.address.countryName}<br />
+          E-Mail: <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a>
+        </address>
+      </section>
+
+      <section>
+        <h2>Erhebung und Verarbeitung von Daten</h2>
+        <p>
+          Diese Webseite erhebt keine personenbezogenen Daten von Besucherinnen
+          und Besuchern. Es werden keine Formulare angeboten, keine Cookies
+          gesetzt und keine Profile erstellt.
+        </p>
+        <p>
+          Wenn Sie uns über die angegebenen Kontaktwege (Telefon, WhatsApp,
+          E-Mail) erreichen, werden die von Ihnen mitgeteilten Daten
+          ausschliesslich zur Beantwortung Ihres Anliegens verwendet und nach
+          Erledigung gemäss den gesetzlichen Aufbewahrungsfristen gelöscht.
+        </p>
+      </section>
+
+      <section>
+        <h2>Server-Logs</h2>
+        <p>
+          Beim Aufruf dieser Webseite werden vom Hosting-Anbieter automatisch
+          technische Informationen wie IP-Adresse, Browsertyp, Datum und Uhrzeit
+          des Zugriffs sowie übertragene Datenmenge zu Sicherheits- und
+          Stabilitätszwecken erhoben. Diese Daten werden nicht mit anderen
+          Datenquellen zusammengeführt und nach kurzer Zeit gelöscht.
+        </p>
+      </section>
+
+      <section>
+        <h2>Externe Dienste</h2>
+        <p>
+          Diese Webseite verwendet keine externen Tracker oder Analyse-Tools.
+          Schriften werden lokal eingebunden, es findet keine Verbindung zu
+          Drittanbietern wie Google Fonts statt.
+        </p>
+      </section>
+
+      <section>
+        <h2>Ihre Rechte</h2>
+        <p>
+          Sie haben das Recht auf Auskunft, Berichtigung, Löschung oder
+          Einschränkung der Verarbeitung Ihrer Daten sowie auf
+          Datenübertragbarkeit. Wenden Sie sich für entsprechende Anfragen an
+          die oben angegebene Kontaktadresse.
+        </p>
+      </section>
+
+      <section>
+        <h2>Änderungen</h2>
+        <p>
+          Wir behalten uns vor, diese Datenschutzerklärung jederzeit anzupassen,
+          sodass sie stets den aktuellen rechtlichen Anforderungen entspricht.
+        </p>
+      </section>
+
+      <p class="legal__back">
+        <a href="/">← Zurück zur Startseite</a>
+      </p>
+    </article>
+  </main>
+  <Footer />
+</BaseLayout>

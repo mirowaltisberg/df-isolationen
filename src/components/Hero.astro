@@ -1,0 +1,274 @@
+---
+import { Image } from 'astro:assets';
+import { site } from '../data/site';
+
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  '/src/assets/images/*.{jpg,jpeg,png,webp}',
+  { eager: true }
+);
+const bodenImg   = images['/src/assets/images/service-boden.jpg']?.default;
+const fassadeImg = images['/src/assets/images/service-fassade.jpg']?.default;
+const malerImg   = images['/src/assets/images/service-maler.jpg']?.default;
+
+const columns = [
+  { num: '01', label: 'Industrieboden',     img: bodenImg,   alt: 'Industrieboden — Epoxy-Beschichtung in einer Halle' },
+  { num: '02', label: 'Generalunternehmung', img: fassadeImg, alt: 'Generalunternehmung — Baustelle mit Gerüst und Bauleitung' },
+  { num: '03', label: 'Malerarbeiten',       img: malerImg,   alt: 'Malerarbeiten — Anstrich an einer Wand' },
+];
+---
+<section class="hero" aria-labelledby="hero-headline">
+  <div class="hero__bg" aria-hidden="true">
+    {columns.map((c) => (
+      c.img && (
+        <div class="hero__col">
+          <Image
+            src={c.img}
+            alt=""
+            widths={[720, 1080, 1440, 1920, 2400]}
+            sizes="100vw"
+            loading="eager"
+            fetchpriority="high"
+            format="webp"
+            quality={86}
+            class="hero__col-img"
+          />
+          <span class="hero__col-overlay"></span>
+          <span class="hero__col-label">
+            <span class="hero__col-num tnum">{c.num}</span>
+            <span class="hero__col-name">{c.label}</span>
+          </span>
+        </div>
+      )
+    ))}
+  </div>
+
+  <div class="hero__inner container">
+    <p class="hero__eyebrow" data-reveal data-reveal-delay="1">
+      {site.hero.eyebrow}
+    </p>
+
+    <h1 id="hero-headline" class="hero__headline" data-reveal data-reveal-delay="2">
+      Isolation ist <em>unser</em> Handwerk.
+    </h1>
+
+    <p class="hero__sub" data-reveal data-reveal-delay="3">
+      {site.hero.sub}
+    </p>
+
+    <div class="hero__ctas" data-reveal data-reveal-delay="4">
+      <a class="btn btn--primary" href={site.hero.primaryCta.href}>
+        {site.hero.primaryCta.label}
+        <span aria-hidden="true">→</span>
+      </a>
+      <a class="btn btn--ghost-light" href={site.hero.secondaryCta.href}>
+        <span aria-hidden="true">↗</span>
+        {site.hero.secondaryCta.label}
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    background: var(--c-anthracite);
+    color: var(--c-cream);
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  /* ---------- Background: 3 image columns ---------- */
+  .hero__bg {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    height: 38vh;
+    min-height: 240px;
+    gap: 1px;
+    background: var(--c-anthracite); /* gap separator color */
+  }
+
+  .hero__col {
+    position: relative;
+    overflow: hidden;
+    background: var(--c-anthracite-soft);
+  }
+
+  .hero__col-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: contrast(1.05) saturate(0.92) brightness(0.92);
+  }
+
+  .hero__col-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to top,
+        rgba(45, 42, 38, 0.85) 0%,
+        rgba(45, 42, 38, 0.35) 50%,
+        rgba(45, 42, 38, 0.55) 100%);
+  }
+
+  .hero__col-label {
+    position: absolute;
+    left: 14px;
+    bottom: 12px;
+    z-index: 2;
+    display: none;
+    flex-direction: column;
+    gap: 2px;
+    line-height: 1.05;
+  }
+  @media (min-width: 720px) {
+    .hero__col-label {
+      display: flex;
+    }
+  }
+  .hero__col-num {
+    font-family: var(--font-display);
+    font-feature-settings: 'tnum' 1, 'lnum' 1;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    color: var(--c-terracotta-soft);
+  }
+  .hero__col-name {
+    font-family: var(--font-display);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--c-cream);
+  }
+
+  /* ---------- Foreground content ---------- */
+  .hero__inner {
+    position: relative;
+    z-index: 3;
+    padding-block: clamp(48px, 8vw, 96px) clamp(56px, 10vw, 112px);
+  }
+
+  .hero__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    font-family: var(--font-display);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--c-cream);
+    margin-bottom: var(--s-5);
+  }
+  .hero__eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 32px;
+    height: 1px;
+    background: var(--c-terracotta);
+  }
+
+  .hero__headline {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(2.5rem, 6.5vw, 6rem);
+    line-height: 0.96;
+    letter-spacing: -0.04em;
+    color: var(--c-cream);
+    max-width: 16ch;
+    margin-bottom: var(--s-5);
+  }
+  .hero__headline em {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-weight: 500;
+    color: var(--c-terracotta-soft);
+    font-variation-settings: "opsz" 28;
+  }
+
+  .hero__sub {
+    font-family: var(--font-body);
+    font-size: clamp(1.05rem, 1.6vw, 1.35rem);
+    line-height: 1.55;
+    color: rgba(245, 241, 234, 0.86);
+    max-width: 56ch;
+    margin-bottom: var(--s-6);
+    font-variation-settings: "opsz" 16;
+  }
+
+  .hero__ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-3);
+  }
+
+  /* ===================================================
+     TABLET+ : full-height columns become the background,
+     content overlays on top, diagonal gradient added
+     =================================================== */
+  @media (min-width: 720px) {
+    .hero {
+      min-height: 100svh;
+      display: grid;
+      align-items: center;
+    }
+
+    .hero__bg {
+      position: absolute;
+      inset: 0;
+      height: auto;
+      z-index: 0;
+    }
+
+    .hero__bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 4;
+      background:
+        linear-gradient(110deg,
+          rgba(45, 42, 38, 0.78) 0%,
+          rgba(45, 42, 38, 0.55) 28%,
+          rgba(45, 42, 38, 0.18) 50%,
+          rgba(45, 42, 38, 0.10) 75%,
+          rgba(45, 42, 38, 0.30) 100%),
+        linear-gradient(to bottom,
+          rgba(45, 42, 38, 0.05) 0%,
+          rgba(45, 42, 38, 0.0) 50%,
+          rgba(45, 42, 38, 0.25) 100%);
+    }
+
+    .hero__col-overlay {
+      background:
+        linear-gradient(to top,
+          rgba(45, 42, 38, 0.55) 0%,
+          rgba(45, 42, 38, 0.0) 35%,
+          rgba(45, 42, 38, 0.0) 100%);
+    }
+
+    .hero__col-label {
+      left: 24px;
+      bottom: 24px;
+      z-index: 5;
+    }
+    .hero__col-num {
+      font-size: 0.78rem;
+    }
+    .hero__col-name {
+      font-size: 0.95rem;
+    }
+
+    .hero__inner {
+      padding-block: clamp(120px, 18vh, 200px);
+      width: 100%;
+    }
+  }
+
+  @media (min-width: 1100px) {
+    .hero__col-name {
+      font-size: 1.05rem;
+    }
+  }
+</style>

@@ -1,0 +1,143 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { site } from '../data/site';
+const phone = site.contact.phones[0];
+---
+<BaseLayout
+  pathname="/impressum"
+  title={`Impressum — ${site.name}`}
+  description={`Impressum von ${site.legalName}, Zürich.`}
+>
+  <Header />
+  <main id="main" class="legal">
+    <article class="container container--narrow">
+      <header class="legal__header">
+        <p class="eyebrow">Rechtliches</p>
+        <h1>Impressum</h1>
+      </header>
+
+      <section>
+        <h2>Verantwortliche Stelle</h2>
+        <address>
+          {site.legalName}<br />
+          {site.contact.address.street}<br />
+          {site.contact.address.postal} {site.contact.address.city}<br />
+          {site.contact.address.countryName}
+        </address>
+      </section>
+
+      <section>
+        <h2>Handelsregister</h2>
+        <p>
+          Handelsregisternummer: CH-020.4.086.779-8<br />
+          UID: CHE-177.200.416<br />
+          Registergericht: Handelsregisteramt des Kantons Zürich
+        </p>
+      </section>
+
+      <section>
+        <h2>Kontakt</h2>
+        <p>
+          Telefon: <a href={`tel:${phone.tel}`}>{phone.display}</a><br />
+          E-Mail: <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a>
+        </p>
+      </section>
+
+      <section>
+        <h2>Haftungsausschluss</h2>
+        <p>
+          Der Verfasser übernimmt keinerlei Gewähr hinsichtlich der inhaltlichen
+          Richtigkeit, Genauigkeit, Aktualität, Zuverlässigkeit und
+          Vollständigkeit der Informationen. Haftungsansprüche gegen den
+          Verfasser wegen Schäden materieller oder immaterieller Art, welche aus
+          dem Zugriff oder der Nutzung bzw. Nichtnutzung der veröffentlichten
+          Informationen, durch Missbrauch der Verbindung oder durch technische
+          Störungen entstanden sind, werden ausgeschlossen.
+        </p>
+        <p>
+          Alle Angebote sind unverbindlich. Der Verfasser behält es sich
+          ausdrücklich vor, Teile der Seiten oder das gesamte Angebot ohne
+          gesonderte Ankündigung zu verändern, zu ergänzen, zu löschen oder die
+          Veröffentlichung zeitweise oder endgültig einzustellen.
+        </p>
+      </section>
+
+      <section>
+        <h2>Haftung für Links</h2>
+        <p>
+          Verweise und Links auf Webseiten Dritter liegen ausserhalb unseres
+          Verantwortungsbereichs. Es wird jegliche Verantwortung für solche
+          Webseiten abgelehnt. Der Zugriff und die Nutzung solcher Webseiten
+          erfolgen auf eigene Gefahr des Nutzers oder der Nutzerin.
+        </p>
+      </section>
+
+      <section>
+        <h2>Urheberrechte</h2>
+        <p>
+          Die Urheber- und alle anderen Rechte an Inhalten, Bildern, Fotos oder
+          anderen Dateien auf dieser Website gehören ausschliesslich der {site.legalName}
+          oder den speziell genannten Rechtsinhabern. Für die Reproduktion
+          jeglicher Elemente ist die schriftliche Zustimmung der
+          Urheberrechtsträger im Voraus einzuholen.
+        </p>
+      </section>
+
+      <p class="legal__back">
+        <a href="/">← Zurück zur Startseite</a>
+      </p>
+    </article>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style is:global>
+  .legal {
+    padding: clamp(48px, 8vw, 112px) 0 clamp(48px, 8vw, 112px);
+    background: var(--c-cream);
+    min-height: 60vh;
+  }
+  .legal__header {
+    margin-bottom: var(--s-7);
+    padding-bottom: var(--s-5);
+    border-bottom: 1px solid var(--c-line);
+  }
+  .legal h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.25rem, 5vw, 3.75rem);
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+    margin-top: var(--s-3);
+  }
+  .legal h2 {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    margin: var(--s-7) 0 var(--s-3);
+    color: var(--c-anthracite);
+    letter-spacing: -0.02em;
+  }
+  .legal p,
+  .legal address {
+    font-family: var(--font-body);
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    margin-bottom: var(--s-3);
+    max-width: 70ch;
+    color: var(--c-anthracite-soft);
+    font-style: normal;
+    font-variation-settings: "opsz" 16;
+  }
+  .legal a {
+    color: var(--c-terracotta);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+  .legal a:hover { color: var(--c-terracotta-deep); }
+  .legal__back {
+    margin-top: var(--s-7);
+    padding-top: var(--s-5);
+    border-top: 1px solid var(--c-line);
+  }
+</style>

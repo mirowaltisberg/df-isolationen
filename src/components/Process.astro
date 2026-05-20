@@ -1,0 +1,71 @@
+---
+import { site } from '../data/site';
+import ProcessStep from './ProcessStep.astro';
+---
+<section id="prozess" class="process" aria-labelledby="process-h">
+  <div class="container">
+    <header class="process__header">
+      <span class="section-num" aria-hidden="true">04</span>
+      <div class="process__intro">
+        <p class="eyebrow">{site.process.eyebrow}</p>
+        <h2 id="process-h">{site.process.headline}</h2>
+      </div>
+    </header>
+
+    <ol class="process__list">
+      {site.process.steps.map((step, i) => (
+        <ProcessStep step={step} isLast={i === site.process.steps.length - 1} />
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .process {
+    padding: clamp(64px, 12vw, 144px) 0;
+    background: var(--c-anthracite);
+    color: var(--c-cream);
+    position: relative;
+  }
+  .process::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--c-terracotta);
+  }
+
+  .process__header {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-3);
+    margin-bottom: var(--s-7);
+  }
+  @media (min-width: 720px) {
+    .process__header {
+      grid-template-columns: auto 1fr;
+      gap: clamp(20px, 4vw, 56px);
+      align-items: end;
+    }
+  }
+
+  .process__header .section-num {
+    color: rgba(245, 241, 234, 0.16);
+  }
+
+  .process__intro h2 {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4.5vw, 3.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+    color: var(--c-cream);
+    max-width: 22ch;
+    margin-top: var(--s-3);
+  }
+
+  .process__list {
+    border-top: 1px solid rgba(245, 241, 234, 0.15);
+  }
+</style>

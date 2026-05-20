@@ -1,0 +1,87 @@
+---
+import { site } from '../data/site';
+import ServiceCard from './ServiceCard.astro';
+---
+<section id="leistungen" class="services" aria-labelledby="services-h">
+  <div class="container">
+    <header class="services__header">
+      <span class="section-num" aria-hidden="true">02</span>
+      <div class="services__intro">
+        <p class="eyebrow">Leistungen</p>
+        <h2 id="services-h">Was wir bauen, sanieren, isolieren.</h2>
+        <p class="services__lead">
+          Sechs Gewerke, ein Ansprechpartner. Spezialisiert auf Fassadenisolation
+          und Epoxy-Industrieböden — über 15 Jahre Handwerk rund ums Haus.
+        </p>
+      </div>
+    </header>
+
+    <div class="services__grid">
+      {site.services.map((s) => <ServiceCard service={s} />)}
+    </div>
+  </div>
+</section>
+
+<style>
+  .services {
+    padding: clamp(64px, 12vw, 144px) 0;
+    background: var(--c-cream);
+  }
+
+  .services__header {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-3);
+    margin-bottom: var(--s-7);
+  }
+
+  @media (min-width: 720px) {
+    .services__header {
+      grid-template-columns: auto 1fr;
+      gap: clamp(20px, 4vw, 56px);
+      align-items: end;
+    }
+  }
+
+  .services__intro h2 {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4.5vw, 3.75rem);
+    line-height: 1.02;
+    letter-spacing: -0.035em;
+    margin-top: var(--s-3);
+    margin-bottom: var(--s-3);
+    max-width: 18ch;
+  }
+
+  .services__lead {
+    font-family: var(--font-body);
+    font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+    line-height: 1.6;
+    color: var(--c-anthracite-soft);
+    max-width: 52ch;
+    font-variation-settings: "opsz" 16;
+  }
+
+  .services__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    border-top: 1px solid var(--c-line);
+    border-left: 1px solid var(--c-line);
+  }
+  .services__grid > article {
+    border-right: 1px solid var(--c-line);
+    border-bottom: 1px solid var(--c-line);
+  }
+
+  @media (min-width: 720px) {
+    .services__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1080px) {
+    .services__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,158 @@
+---
+import Logo from './Logo.astro';
+import { site } from '../data/site';
+const year = new Date().getFullYear();
+const phone = site.contact.phones[0];
+---
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <Logo variant="light" size="lg" />
+      <p class="footer__tag">{site.tagline}</p>
+    </div>
+
+    <div class="footer__grid">
+      <div class="footer__col">
+        <span class="footer__label">Adresse</span>
+        <p>
+          {site.legalName}<br />
+          {site.contact.address.street}<br />
+          {site.contact.address.postal} {site.contact.address.city}
+        </p>
+      </div>
+
+      <div class="footer__col">
+        <span class="footer__label">Direkter Draht</span>
+        <p>
+          <a class="tnum" href={`tel:${phone.tel}`}>{phone.display}</a>
+        </p>
+      </div>
+
+      <div class="footer__col">
+        <span class="footer__label">Leistungen</span>
+        <ul class="footer__services">
+          {site.services.slice(0, 4).map((s) => (
+            <li><a href={`#${`leistung-${s.slug}`}`}>{s.title}</a></li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <span class="footer__label">Rechtliches</span>
+        <ul class="footer__services">
+          <li><a href="/impressum">Impressum</a></li>
+          <li><a href="/datenschutz">Datenschutz</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <span class="tnum">© {year} {site.legalName}</span>
+      <span>
+        Mit Sorgfalt gebaut in Zürich · by
+        <a class="footer__credit" href="https://mirowaltisberg.ch" target="_blank" rel="noopener noreferrer" aria-label="mirowaltisberg.ch (öffnet in neuem Tab)">Miró</a>
+      </span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    padding: var(--s-8) 0 var(--s-5);
+    background: var(--c-anthracite);
+    color: var(--c-cream);
+    border-top: 4px solid var(--c-terracotta);
+  }
+
+  .footer__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--s-4);
+    padding-bottom: var(--s-5);
+    border-bottom: 1px solid rgba(245, 241, 234, 0.15);
+  }
+
+  .footer__tag {
+    font-family: var(--font-display);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(245, 241, 234, 0.7);
+  }
+
+  .footer__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s-5);
+    padding: var(--s-6) 0 var(--s-7);
+  }
+  @media (min-width: 700px) {
+    .footer__grid { grid-template-columns: repeat(4, 1fr); }
+  }
+
+  .footer__label {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--c-terracotta);
+    margin-bottom: var(--s-3);
+  }
+
+  .footer__col p {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: rgba(245, 241, 234, 0.85);
+  }
+
+  .footer__services {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .footer__services li {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+  }
+  .footer__col a {
+    color: rgba(245, 241, 234, 0.85);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: color var(--t-fast) var(--ease-out), border-color var(--t-fast) var(--ease-out);
+  }
+  .footer__col a:hover {
+    color: var(--c-terracotta-soft);
+    border-bottom-color: var(--c-terracotta-soft);
+  }
+
+  .footer__bottom {
+    padding-top: var(--s-5);
+    border-top: 1px solid rgba(245, 241, 234, 0.15);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--s-3);
+    font-family: var(--font-display);
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    color: rgba(245, 241, 234, 0.55);
+  }
+
+  .footer__credit {
+    color: var(--c-terracotta-soft);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    transition: color var(--t-fast) var(--ease-out);
+    margin-left: 4px;
+  }
+  .footer__credit:hover {
+    color: var(--c-cream);
+  }
+</style>

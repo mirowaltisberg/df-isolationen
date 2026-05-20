@@ -1,0 +1,73 @@
+---
+interface Props {
+  step: { number: string; title: string; body: string };
+  isLast?: boolean;
+}
+const { step, isLast = false } = Astro.props;
+---
+<li class:list={['step', { 'step--last': isLast }]}>
+  <span class="step__num tnum" aria-hidden="true">{step.number}</span>
+  <h3 class="step__title">{step.title}</h3>
+  <p class="step__body">{step.body}</p>
+</li>
+
+<style>
+  .step {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "num"
+      "title"
+      "body";
+    gap: var(--s-2);
+    padding: var(--s-5) 0;
+    border-bottom: 1px solid rgba(245, 241, 234, 0.15);
+    position: relative;
+  }
+  .step--last {
+    border-bottom: 0;
+  }
+
+  @media (min-width: 720px) {
+    .step {
+      grid-template-columns: 120px minmax(220px, 1fr) 2fr;
+      grid-template-areas: "num title body";
+      gap: clamp(24px, 4vw, 56px);
+      align-items: start;
+      padding: var(--s-6) 0;
+    }
+  }
+
+  .step__num {
+    grid-area: num;
+    font-family: var(--font-display);
+    font-feature-settings: 'tnum' 1, 'lnum' 1;
+    font-weight: 800;
+    font-size: clamp(2.75rem, 5.5vw, 5rem);
+    line-height: 0.9;
+    letter-spacing: -0.05em;
+    color: var(--c-terracotta);
+    align-self: start;
+  }
+
+  .step__title {
+    grid-area: title;
+    font-family: var(--font-display);
+    font-weight: 720;
+    font-size: clamp(1.4rem, 2.4vw, 2rem);
+    line-height: 1.1;
+    color: var(--c-cream);
+    letter-spacing: -0.02em;
+    align-self: start;
+  }
+
+  .step__body {
+    grid-area: body;
+    font-family: var(--font-body);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    color: rgba(245, 241, 234, 0.78);
+    max-width: 52ch;
+    font-variation-settings: "opsz" 16;
+  }
+</style>

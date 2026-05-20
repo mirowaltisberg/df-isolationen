@@ -1,0 +1,185 @@
+---
+import { Image } from 'astro:assets';
+import { site } from '../data/site';
+
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  '/src/assets/images/*.{jpg,jpeg,png,webp}',
+  { eager: true }
+);
+const aboutImg = images['/src/assets/images/about.jpg']?.default;
+---
+<section id="ueber-uns" class="about" aria-labelledby="about-h">
+  <div class="container about__inner">
+    <div class="about__text">
+      <span class="section-num" aria-hidden="true">03</span>
+      <p class="eyebrow">{site.about.eyebrow}</p>
+      <h2 id="about-h">{site.about.headline}</h2>
+      <p class="about__body">{site.about.body}</p>
+
+      <ul class="about__values">
+        {site.about.values.map((v) => (
+          <li>
+            <strong>{v.word}.</strong>
+            <span>{v.body}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    {aboutImg && (
+      <figure class="about__media">
+        <div class="about__media-wrap">
+          <Image
+            src={aboutImg}
+            alt="Werkstatt mit Werkzeugen — Symbolbild für solides Handwerk"
+            widths={[420, 720, 1080]}
+            sizes="(min-width: 900px) 45vw, 100vw"
+            loading="lazy"
+            format="webp"
+            quality={82}
+            class="about__img"
+          />
+          <span class="about__tag" aria-hidden="true">{site.about.tag}</span>
+        </div>
+        <figcaption class="about__caption">
+          <span>{site.about.caption.left}</span>
+          <span>{site.about.caption.right}</span>
+        </figcaption>
+      </figure>
+    )}
+  </div>
+</section>
+
+<style>
+  .about {
+    padding: clamp(64px, 12vw, 144px) 0;
+    background: var(--c-sand);
+    border-top: 1px solid var(--c-sand-deep);
+    border-bottom: 1px solid var(--c-sand-deep);
+  }
+
+  .about__inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-7);
+    align-items: start;
+  }
+
+  @media (min-width: 920px) {
+    .about__inner {
+      grid-template-columns: 1.05fr 1fr;
+      gap: clamp(48px, 6vw, 96px);
+    }
+  }
+
+  .about__text {
+    max-width: 60ch;
+  }
+
+  .about__text h2 {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4.5vw, 3.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+    margin-top: var(--s-3);
+    margin-bottom: var(--s-5);
+    max-width: 16ch;
+  }
+
+  .about__body {
+    font-family: var(--font-body);
+    font-size: clamp(1.0625rem, 1.4vw, 1.2rem);
+    line-height: 1.65;
+    color: var(--c-anthracite);
+    margin-bottom: var(--s-6);
+    font-variation-settings: "opsz" 16;
+  }
+
+  .about__values {
+    display: grid;
+    grid-template-columns: 1fr;
+    border-top: 1px solid var(--c-sand-deep);
+  }
+  @media (min-width: 600px) {
+    .about__values { grid-template-columns: repeat(2, 1fr); }
+    .about__values li:nth-child(2n) { border-left: 1px solid var(--c-sand-deep); padding-left: var(--s-4); }
+  }
+
+  .about__values li {
+    padding: var(--s-4) 0;
+    border-bottom: 1px solid var(--c-sand-deep);
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    line-height: 1.5;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .about__values strong {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--c-anthracite);
+    letter-spacing: -0.02em;
+  }
+  .about__values strong::after {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: var(--c-terracotta);
+    margin-left: 8px;
+    transform: translateY(-2px);
+  }
+
+  .about__values span {
+    color: var(--c-anthracite-soft);
+    font-size: 1rem;
+  }
+
+  /* Media column */
+  .about__media {
+    margin: 0;
+    position: relative;
+  }
+  .about__media-wrap {
+    position: relative;
+    overflow: hidden;
+  }
+  .about__img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    filter: saturate(0.95);
+  }
+  .about__tag {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    background: var(--c-anthracite);
+    color: var(--c-cream);
+    padding: 8px 14px;
+    font-family: var(--font-display);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+
+  .about__caption {
+    margin-top: var(--s-3);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--s-2);
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--c-anthracite-soft);
+    padding-top: var(--s-3);
+    border-top: 1px solid var(--c-sand-deep);
+  }
+</style>
