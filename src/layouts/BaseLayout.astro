@@ -3,6 +3,7 @@ import '@fontsource-variable/schibsted-grotesk';
 import '@fontsource-variable/newsreader';
 import '../styles/global.css';
 import { site } from '../data/site';
+import Analytics from '@vercel/analytics/astro';
 
 interface Props {
   title?: string;
@@ -138,5 +139,6 @@ const localBusinessJsonLd = {
   <body>
     <a href="#main" class="skip-link">Zum Inhalt springen</a>
     <slot />
+    <Analytics />
   </body>
 </html>
