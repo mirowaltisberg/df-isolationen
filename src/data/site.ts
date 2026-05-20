@@ -70,7 +70,7 @@ export const site = {
 
   hero: {
     eyebrow: 'Über 15 Jahre Handwerk · Zürich',
-    headline: 'Handwerk mit Präzision und Leidenschaft.',
+    headline: 'Handwerk mit Präzision und Leidenschaft',
     sub: 'Vom Fassadenputz bis zum Epoxy-Boden. Vom Pinselstrich bis zum Gesamtumbau. Alles aus einer Hand — sauber, pünktlich, persönlich.',
     primaryCta: { label: 'Offerte anfragen', href: '#kontakt' },
     secondaryCta: { label: '076 302 32 23 anrufen', href: 'tel:+41763023223' },
